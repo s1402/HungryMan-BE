@@ -29,7 +29,6 @@
     "jsonwebtoken": "^9.0.2",
     "logger": "^0.0.1",
     "mongoose": "^8.15.1",
-    "nodemailer": "^7.0.3",
     "pino": "^9.7.0"
   },
   "devDependencies": {
