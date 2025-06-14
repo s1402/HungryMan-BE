@@ -2,14 +2,16 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 
 const pino = require("pino");
-const { ownerRegisterSchema } = require("../validations/ownerValidations");
-const { foodieRegisterSchema } = require("../validations/foodieValidations");
-const Owner = require("../models/owner");
-const Foodie = require("../models/foodie");
+const { ownerRegisterSchema } = require("../../validations/ownerValidations");
+const { foodieRegisterSchema } = require("../../validations/foodieValidations");
+const Owner = require("../../models/owner");
+const Foodie = require("../../models/foodie");
+const ERROR = require("../../enums/Error");
 
 const logger = pino({ level: "info" });
 const router = express.Router();
 
+// REGISTER Owner
 router.post("/owner", async (req, res) => {
   try {
     // 1. validate the payload
@@ -22,7 +24,7 @@ router.post("/owner", async (req, res) => {
     // 2. Check if email exists
     const user = await Owner.findOne({ email });
     if (user) {
-      return res.status(409).json({ error: "User already exists" });
+      return res.status(409).json({ error: ERROR.USER_ALREADY_EXISTS });
     }
 
     // 3. hash the password
@@ -52,10 +54,11 @@ router.post("/owner", async (req, res) => {
     });
   } catch (err) {
     logger.error(`error in register route ${err}`);
-    res.status(500).json({ error: "Server error" });
+    res.status(500).json({ error: ERROR.SERVER_ERROR });
   }
 });
 
+// REGISTER fOODIE
 router.post("/foodie", async (req, res) => {
   try {
     // 1. validate the payload
@@ -68,7 +71,7 @@ router.post("/foodie", async (req, res) => {
     // 2. Check if email exists
     const user = await Foodie.findOne({ email });
     if (user) {
-      return res.status(409).json({ error: "User already exists" });
+      return res.status(409).json({ error: ERROR.USER_ALREADY_EXISTS });
     }
 
     // 3. hash the password
@@ -94,7 +97,7 @@ router.post("/foodie", async (req, res) => {
     });
   } catch (err) {
     logger.error(`error in register route ${err}`);
-    res.status(500).json({ error: "Server error" });
+    res.status(500).json({ error: ERROR.SERVER_ERROR });
   }
 });
 module.exports = router;

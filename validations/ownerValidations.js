@@ -15,3 +15,8 @@ exports.ownerRegisterSchema = Joi.object({
   restaurantName: Joi.string().min(2).required(),
   address: addressSchema.required()
 });
+
+exports.ownerLoginSchema = Joi.object({
+  email: Joi.string().email().required(),
+  password: Joi.string().min(6).required()
+});
