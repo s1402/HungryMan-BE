@@ -79,7 +79,7 @@ router.post("/foodie", async (req, res) => {
 
     // 4. Generate jwt token and return it
     const token = jwt.sign(
-      { _id: foodie._id, role: Roles.FOODIE },
+      { _id: foodie._id, role: Roles.FOODIE, name: foodie.name },
       process.env.JWT_SECRET,
       { expiresIn: "2d" }
     );

@@ -3,6 +3,8 @@ const pino = require("pino");
 const Recipe = require("../../models/recipe");
 const logger = pino({ level: "info" });
 const { recipeSchema } = require("../../validations/recipeValidations");
+const ERROR = require("../../enums/Error");
+const MESSAGE = require("../../enums/Messages");
 const router = express.Router();
 
 // Add a recipe
@@ -19,7 +21,7 @@ router.post("/", async (req, res) => {
     return res.status(201).json(savedRecipe);
   } catch (err) {
     logger.error(`error in /recipe route ${err}`);
-    res.status(500).json({ error: "Server error" });
+    res.status(500).json({ error: ERROR.SERVER_ERROR });
   }
 });
 
@@ -34,7 +36,7 @@ router.get("/", async (req, res) => {
     return res.status(200).json(recipes);
   } catch (err) {
     logger.error(`error in /recipe route ${err}`);
-    res.status(500).json({ error: "Server error" });
+    res.status(500).json({ error: ERROR.SERVER_ERROR });
   }
 });
 
@@ -52,7 +54,7 @@ router.patch("/:id", async (req, res) => {
     return res.status(200).json(updatedRecipe);
   } catch (err) {
     logger.error(`error in /recipe route ${err}`);
-    res.status(500).json({ error: "Server error" });
+    res.status(500).json({ error: ERROR.SERVER_ERROR });
   }
 });
 
@@ -62,10 +64,10 @@ router.delete("/:id", async (req, res) => {
     await Recipe.findByIdAndDelete(
       req.params.id,
     );
-    return res.status(200).json({ message: "Recipe Deleted"});
+    return res.status(200).json({ message: MESSAGE.RECIPE_DELETED});
   } catch (err) {
     logger.error(`error in /recipe route ${err}`);
-    res.status(500).json({ error: "Server error" });
+    res.status(500).json({ error: ERROR.SERVER_ERROR });
   }
 });
 

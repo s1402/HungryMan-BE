@@ -11,6 +11,7 @@ const ERROR = {
   OWNER_NOT_FOUND: "Owner not found",
   EMAIL_REQUIRED: "Email is required",
   PASSWORD_REQUIRED: "Password is required",
+  INVALID_TOKEN: "Invalid or expired token."
 };
 
 module.exports = ERROR;

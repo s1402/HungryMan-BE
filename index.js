@@ -6,6 +6,7 @@ const pino = require("pino");
 const register = require("./routes/auth/register")
 const login = require("./routes/auth/login");
 const recipe = require("./routes/owner/recipe");
+const foodieRecipe = require("./routes/foodie/recipe");
 
 require("dotenv").config();
 
@@ -29,6 +30,7 @@ app.use(cors());
 app.use("/api/register",register);
 app.use("/api/login",login);
 app.use("/api/owner/recipes",recipe);
+app.use("/api/recipes",foodieRecipe);
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => logger.info(`server started on port ${port}`));

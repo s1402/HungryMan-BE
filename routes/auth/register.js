@@ -7,6 +7,7 @@ const { foodieRegisterSchema } = require("../../validations/foodieValidations");
 const Owner = require("../../models/owner");
 const Foodie = require("../../models/foodie");
 const ERROR = require("../../enums/Error");
+const MESSAGE = require("../../enums/Messages");
 
 const logger = pino({ level: "info" });
 const router = express.Router();
@@ -44,7 +45,7 @@ router.post("/owner", async (req, res) => {
 
     // 5 output the added owner
     return res.status(201).json({
-      message: "Owner registered Successfully",
+      message: MESSAGE.OWNER_REGSITERED,
       owner: {
         _id: newOwner._id,
         name: newOwner.name,
@@ -88,7 +89,7 @@ router.post("/foodie", async (req, res) => {
 
     // 5 output the added foodie
     return res.status(201).json({
-      message: "Foodie registered Successfully",
+      message: MESSAGE.FOODIE_REGSITERED,
       foodie: {
         _id: newFoodie._id,
         name: newFoodie.name,
