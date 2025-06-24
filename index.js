@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
@@ -7,8 +9,6 @@ const register = require("./routes/auth/register")
 const login = require("./routes/auth/login");
 const recipe = require("./routes/owner/recipe");
 const foodieRecipe = require("./routes/foodie/recipe");
-
-require("dotenv").config();
 
 const app = express();
 const logger = pino({ level: "info" });

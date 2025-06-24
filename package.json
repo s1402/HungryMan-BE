@@ -20,6 +20,7 @@
   "dependencies": {
     "bcrypt": "^6.0.0",
     "body-parser": "^2.2.0",
+    "cloudinary": "^1.41.3",
     "config": "^4.0.0",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
@@ -29,6 +30,8 @@
     "jsonwebtoken": "^9.0.2",
     "logger": "^0.0.1",
     "mongoose": "^8.15.1",
+    "multer": "^2.0.1",
+    "multer-storage-cloudinary": "^4.0.0",
     "pino": "^9.7.0"
   },
   "devDependencies": {
