@@ -135,7 +135,6 @@ router.post("/ratings/:id", verifyToken, async (req, res) => {
 // Get RECIPE By Id
 router.get("/:id", async (req, res) => {
   try {
-    console.log(">>>>>>");
     const id = req.params.id;
     const recipe = await Recipe.findById(id);
     if (!recipe) {

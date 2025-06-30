@@ -12,13 +12,21 @@ const router = express.Router();
 // Add a recipe
 router.post("/", upload.single("image"), async (req, res) => {
   try {
-    console.log(">>", req.body.ingredients, req.body.steps);
-    console.log(">>", req.file.path, req.file.filename);
+    // Parse stringified arrays (because form-data turns arrays into strings)
+    req.body.ingredients = JSON.parse(req.body.ingredients);
+    req.body.steps = JSON.parse(req.body.steps);
+    req.body.tags = JSON.parse(req.body.tags);
 
     // validate the payload
     const { error } = recipeSchema.validate(req.body);
+    
     if (error) {
       return res.status(400).json({ error: error.message });
+    }
+
+    if (!req.file) {
+      logger.error("Image file is required");
+      return res.status(400).json({ error: ERROR.IMAGE_REQUIRED });
     }
     const { title, description, ingredients, steps, tags, ownerId } = req.body;
     const recipe = new Recipe({
