@@ -28,7 +28,7 @@ router.post("/", upload.single("image"), async (req, res) => {
       logger.error("Image file is required");
       return res.status(400).json({ error: ERROR.IMAGE_REQUIRED });
     }
-    const { title, description, ingredients, steps, tags, ownerId } = req.body;
+    const { title, description, ingredients, steps, tags, ownerId, vegetarian } = req.body;
     const recipe = new Recipe({
       title,
       description,
@@ -36,6 +36,7 @@ router.post("/", upload.single("image"), async (req, res) => {
       steps,
       tags,
       ownerId,
+      vegetarian,
       image: {
         url: req.file.path,
         public_id: req.file.filename,

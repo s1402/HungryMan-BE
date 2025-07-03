@@ -48,6 +48,10 @@ const recipeSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
+    vegetarian: {
+      type: Boolean,
+      default: false,
+    },
     ratings: [
       {
         foodieId: {
