@@ -98,4 +98,20 @@ router.post("/foodie", async (req, res) => {
   }
 });
 
+// get owner details by ownerId
+router.get("/:ownerId", async (req, res) => {
+  try {
+    const { ownerId } = req.params;
+    const owner = await Owner.findById(ownerId);
+    if (!owner) {
+      return res.status(404).json({ error: ERROR.OWNER_NOT_FOUND });
+    }
+
+    return res.status(200).json(owner);
+  } catch (err) {
+    logger.error(`error in /recipe/owner/:ownerId route ${err}`);
+    res.status(500).json({ error: ERROR.SERVER_ERROR });
+  }
+});
+
 module.exports = router;

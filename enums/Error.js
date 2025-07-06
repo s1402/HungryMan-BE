@@ -7,7 +7,7 @@ const ERROR = {
   FORBIDDEN: "Access forbidden. Invalid token.",
   VALIDATION_ERROR: "Validation failed. Check your input.",
   RECIPE_NOT_FOUND: "Recipe not found",
-  USER_NOT_FOUND: "User not found",
+  FOODIE_NOT_FOUND: "Foodie not found",
   OWNER_NOT_FOUND: "Owner not found",
   EMAIL_REQUIRED: "Email is required",
   PASSWORD_REQUIRED: "Password is required",

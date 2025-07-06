@@ -23,6 +23,10 @@ const ownerSchema = new mongoose.Schema(
       required: true,
       index: true, // allows filtering/searching by restaurant
     },
+    image: {
+      url: String,
+      public_id: String, // For Cloudinary deletion later
+    },
     address: {
       street: { type: String, required: true },
       city: { type: String ,required: true },

@@ -13,6 +13,10 @@ exports.ownerRegisterSchema = Joi.object({
   email: Joi.string().email().required(),
   password: Joi.string().min(6).required(),
   restaurantName: Joi.string().min(2).required(),
+  image: Joi.object({
+    url: Joi.string().uri().required(),
+    public_id: Joi.string().required()
+  }),
   address: addressSchema.required()
 });
 
