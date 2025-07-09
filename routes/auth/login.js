@@ -68,7 +68,7 @@ router.post("/foodie", async (req, res) => {
     const { email, password } = req.body;
     const foodie = await Foodie.findOne({ email });
     if (!foodie) {
-      return res.status(400).json({ error: ERROR.USER_NOT_FOUND });
+      return res.status(400).json({ error: ERROR.FOODIE_NOT_FOUND });
     }
 
     // 3. Check if password is correct

@@ -46,7 +46,7 @@ router.post("/favorites/:recipeId", verifyToken, async (req, res) => {
     // 2. check if foodie exists
     const foodie = await Foodie.findById(foodieId);
     if (!foodie) {
-      return res.status(404).json({ error: ERROR.USER_NOT_FOUND });
+      return res.status(404).json({ error: ERROR.FOODIE_NOT_FOUND });
     }
     // 3. check if recipe exists
     const recipe = await Recipe.findById(recipeId);
@@ -84,7 +84,7 @@ router.get("/favorites", verifyToken, async (req, res) => {
     // It replaces the ObjectIds(recipeId) in the favorites array with the actual full documents from the Recipe collection.
     const foodie = await Foodie.findById(foodieId).populate("favorites");
     if (!foodie) {
-      return res.status(404).json({ error: ERROR.USER_NOT_FOUND });
+      return res.status(404).json({ error: ERROR.FOODIE_NOT_FOUND });
     }
     return res.status(200).json(foodie.favorites);
   } catch (err) {
@@ -101,7 +101,7 @@ router.post("/ratings/:id", verifyToken, async (req, res) => {
     const { rating } = req.body;
 
     if (!foodie) {
-      return res.status(404).json({ error: ERROR.USER_NOT_FOUND });
+      return res.status(404).json({ error: ERROR.FOODIE_NOT_FOUND });
     }
 
     const recipeId = req.params.id;
