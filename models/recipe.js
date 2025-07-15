@@ -40,10 +40,10 @@ const recipeSchema = new mongoose.Schema(
       required: true,
       index: true,
     },
-    views: {
-      type: Number,
-      default: 0,
-    },
+    views: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Foodie"
+    }],
     favoritesCount: {
       type: Number,
       default: 0,

@@ -3,7 +3,6 @@ const pino = require("pino");
 const Recipe = require("../../models/recipe");
 const Foodie = require("../../models/foodie");
 const logger = pino({ level: "info" });
-const { recipeSchema } = require("../../validations/recipeValidations");
 const ERROR = require("../../enums/Error");
 const { verifyToken } = require("../../middlewares/verifyToken");
 const MESSAGE = require("../../enums/Messages");
@@ -35,6 +34,31 @@ router.get("/search", async (req, res) => {
     return res.status(500).json({ error: ERROR.SERVER_ERROR });
   }
 });
+
+// update the viewCount of recipe
+router.post("/views/:recipeId",verifyToken, async(req,res)=> {
+  try {
+    let recipeId = req.params.recipeId;
+    let foodieId = req.user._id;
+
+    // 1. check if recipe exists
+    const recipe = await Recipe.findById(recipeId);
+    if (!recipe) {
+      return res.status(404).json({ error: ERROR.RECIPE_NOT_FOUND });
+    }
+
+    // 2.if recipe is not viewed ad recipe in iews
+    if(!recipe.views.includes(foodieId)){
+        recipe.views.push(foodieId)
+        await recipe.save();
+    }
+  
+    return res.status(200).json({ message: MESSAGE.RECIPE_VIEWED });
+  } catch (err) {
+    logger.error(`error in POST /views:recipeId route ${err}`);
+    return res.status(500).json({ error: ERROR.SERVER_ERROR });
+  }
+})
 
 //1. Add/Remove  recipe from favorites[] of foodie
 //2. Inc/Dec favoritesCount for Recipe
