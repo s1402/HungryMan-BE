@@ -36,8 +36,8 @@ router.post("/owner", async (req, res) => {
 
     // 4. Generate jwt token and return it
     const token = jwt.sign(
-      { _id: owner._id, role: Roles.OWNER },
-      process.env.JWT_SECRET,
+      { _id: owner._id, role: Roles.OWNER, name: owner.name  },
+      process.env.JWT_SECRET, 
       { expiresIn: "2d" }
     );
 
