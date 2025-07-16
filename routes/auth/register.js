@@ -80,7 +80,7 @@ router.post("/owner", upload.single("image"), async (req, res) => {
 });
 
 // REGISTER fOODIE
-router.post("/foodie", async (req, res) => {
+router.post("/foodie", upload.single("image"), async (req, res) => {
   try {
     // 1. validate the payload
     const { error } = foodieRegisterSchema.validate(req.body);
